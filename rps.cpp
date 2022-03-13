@@ -4,6 +4,7 @@
 #include <time.h>
 #include <cstdlib>
 #include <unistd.h>
+#include "rps.hpp"
 using namespace std;
 typedef string st;
 
@@ -15,6 +16,7 @@ st ready = "YES";
 st notready = "NO";
 st rps;
 st computre;
+fucntions f;
 void Youlost()
 {
     cout << "-----------" << endl;
@@ -49,34 +51,34 @@ void check(st computre, st rps)
     {
         cout << "Draw" << endl;
     }
-    else if (rps == "Rock" && computre == "Paper")
+    else if (rps == "Rock" or rps == "rock" or rps == "ROCK" && computre == "Paper" )
     {
         cout << "Paper Wraps Rock" << endl;
         cout << "Computer Won!" << endl;
         Youlost();
     }
-    else if (rps == "Paper" && computre == "Rock")
+    else if (rps == "paper" or rps == "Paper" or rps == "PAPER" && computre == "Rock" )
     {
         cout << "Paper Wraps Rock" << endl;
         cout << "You Won!" << endl;
     }
-    else if (rps == "Scissor" && computre == "Rock")
+    else if (rps == "Scissor" or rps == "scissor" or rps == "SCISSOR" && computre == "Rock" )
     {
         cout << "Rock Smash Scissor" << endl;
         cout << "Computer Won!" << endl;
         Youlost();
     }
-    else if (rps == "Rock" && computre == "Scissor")
+    else if (rps == "Rock" or rps == "rock" or rps == "ROCK" && computre == "Scissor")
     {
         cout << "Rock Smash Scissor" << endl;
         cout << "You Won!" << endl;
     }
-    else if (rps == "Scissor" && computre == "Paper")
+    else if (rps == "Scissor" or rps == "scissor" or rps == "SCISSOR" && computre == "Paper" )
     {
         cout << "Scissor Cuts Paper" << endl;
         cout << "You Won!" << endl;
     }
-    else if (rps == "Paper" && computre == "Scissor")
+    else if (rps == "paper" or rps == "Paper" or rps == "PAPER" && computre == "Scissor" )
     {
         cout << "Scissor Cuts Paper" << endl;
         cout << "Computer Won!" << endl;
@@ -87,8 +89,23 @@ void check(st computre, st rps)
         cout << "Please Enter One Of these \n Rock - Paper - Scissor";
     }
 }
-
-void checkready()
+void checkrps(st rps)
+{
+    if (rps == "Rock" or rps == "rock" or rps == "ROCK" or rps == "paper" or rps == "Paper" or rps == "PAPER" or rps == "Scissor" or rps == "scissor" or rps == "SCISSOR")
+    {
+        cout << "1....." << sleep(1) << "..2" << "..." << sleep(1) << "...3." << sleep(1) << endl;
+        cout << "Your Choice Is:" << rps << endl;
+        cout << comhoice << computre << endl;
+        check(computre,rps);
+    }
+    else 
+    {
+        cout << "please enter one of these\n rock-paper-scissor" << endl;
+        f.checkready();
+        
+    }
+}
+void fucntions::checkready()
 {
     cout << endl << "Are Your Ready For Some ROCK-PAPER-SCISSOR?(YES - NO)";
     cin >> askready;
@@ -96,10 +113,7 @@ void checkready()
         {
             cout << AskRPS << endl;
             cin >> rps;
-            cout << "." << sleep(1) << ".." << "..." << sleep(1) << "...." << sleep(1) << endl;
-            cout << "Your Choice Is:" << rps << endl;
-            cout << comhoice << computre << endl;
-            check(computre,rps);
+            checkrps(rps);
         }
         else if (askready == notready)
         {
@@ -108,9 +122,10 @@ void checkready()
         else 
         {
             cout << "please enter one of these\n YES - NO";
-            checkready();
+            f.checkready();
         }
 }
+
 int main()
 {   
     srand(time(NULL));
@@ -118,7 +133,7 @@ int main()
     int RandIndex = rand() % 3;
     computre = RPSarray[RandIndex];
     cout << WLC;
-    checkready();
+    f.checkready();
     
     
     return 0;
